@@ -11,6 +11,7 @@ function UserProfile() {
                 <button className="btn btn-primary">Edit</button>
             </div>
             <div className="container">
+                <h2 className="display-5 my-5">Posts Created by User</h2>
                 <PostCard />
             </div>
         </div>
