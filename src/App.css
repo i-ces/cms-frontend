@@ -55,3 +55,7 @@ div.post-row{
   align-items: center;
   justify-content: center;
 }
+
+.postcard-box {
+  margin-bottom: 2rem;;
+}
