@@ -10,21 +10,19 @@ function PostCard() {
     }, [])
     if (!posts) return <div>No Posts found!</div>
     return (
-        <div className="col-sm-5 py-3">
-            {
-                posts.map(post => {
-                    return (
-                        <div className="card postcard-box" key={post.id}>
-                            <div className="card-body">
-                                <h5 className="card-title">{post.title}</h5>
-                                <p className="card-text">{post.body}</p>
-                                <Link to="#" className="btn btn-primary">Read More</Link>
-                            </div>
+        posts.map(post => {
+            return (
+                <div className="post-box" >
+                    <div className="card postcard-box" key={post.id}>
+                        <div className="card-body">
+                            <h5 className="card-title">{post.title}</h5>
+                            <p className="card-text">{post.body}</p>
+                            <Link to="#" className="btn btn-primary">Read More</Link>
                         </div>
-                    )
-                })
-            }
-        </div>
+                    </div>
+                </div>
+            )
+        })
     )
 }
 

@@ -3,10 +3,8 @@ import PostCard from './PostCard'
 
 function Blog() {
     return (
-        <div className="container">
-            <div className="row post-row">
-                <PostCard />
-            </div>
+        <div className="container my-3">
+            <PostCard />
         </div>
     )
 }
