@@ -11,7 +11,7 @@ function Login() {
     }
     return (
         <div className="loginForm">
-            <form onSubmit={handleSubmit}>
+            <form className="signinForm" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email address</label>
                     <input

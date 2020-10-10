@@ -13,7 +13,7 @@ function Register() {
     }
     return (
         <div className="loginForm">
-            <form onSubmit={handleSubmit}>
+            <form className="registerForm" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Name</label>
                     <input

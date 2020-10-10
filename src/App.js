@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/Home';
 import PostCard from './components/PostCard';
 import Post from './components/Post';
+import CreatePost from './components/CreatePost';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" component={Home} exact />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/create" component={CreatePost} />
         </Switch>
       </div>
       <div className="container">
