@@ -16,6 +16,15 @@ function Navbar() {
                                 <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
                             </li>
                             <li className="nav-item">
+                                <Link className="nav-link" to="/blog">Blog <span className="sr-only">(current)</span></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/profile">Profile <span className="sr-only">(current)</span></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/create">Create <span className="sr-only">(current)</span></Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/register">Register <span className="sr-only">(current)</span></Link>
                             </li>
                             <li className="nav-item">

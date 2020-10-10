@@ -8,6 +8,8 @@ import Home from './components/Home';
 import PostCard from './components/PostCard';
 import Post from './components/Post';
 import CreatePost from './components/CreatePost';
+import UserProfile from './components/UserProfile';
+import Blog from './components/Blog';
 
 function App() {
   return (
@@ -19,15 +21,9 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/create" component={CreatePost} />
+          <Route path="/profile" component={UserProfile} />
+          <Route path="/blog" component={Blog} />
         </Switch>
-      </div>
-      <div className="container">
-        <div className="row post-row">
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-        </div>
       </div>
     </Router>
   );

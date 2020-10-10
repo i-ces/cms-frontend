@@ -57,14 +57,14 @@ div.post-row{
 }
 
 .postcard-box {
-  margin-bottom: 2rem;;
+  margin-bottom: 2rem;
 }
 
 .post-manage-form{
   display: block;
   margin: 3rem auto;
-  width: 70%;
-  padding: 10px;
+  width: 80%;
+  padding: 2rem;
   align-items: center;
   justify-content: center;
   background-color: #e9e9e9;
