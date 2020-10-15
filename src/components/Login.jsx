@@ -1,11 +1,23 @@
 import React, { useState } from 'react'
+import axios from "axios"
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const handleSubmit = e => {
         e.preventDefault();
+        const data ={email,password}
+ axios.post(`http://localhost:4000/users/login`,data).then((res)=>{
+   if(res.data.errorMessage){
+    return  console.log(res.data.errorMessage)
+   }  
+console.log(res.publicProfile,"LOGIN SUCESSFULL")
+ })
+ .catch((error)=>{
+ console.log(error);
+ });
         console.log(email, password);
+
         setEmail("");
         setPassword("");
     }

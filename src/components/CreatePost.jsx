@@ -1,10 +1,23 @@
 import React, { useState } from 'react'
+import axios from "axios"
 
 function CreatePost() {
     const [title, setTitle] = useState("");
     const [postBody, setPostBody] = useState("");
     const handleSubmit = e => {
         e.preventDefault();
+
+        const data ={title,postBody}
+ axios.post(`http://localhost:4000/content`,data).then((res)=>{
+ if(res.errorMessage){
+ console.log(res.errorMessage);
+ }
+ console.log(res.content,"Content Created")
+ })
+ .catch((error)=>{
+ console.log(error);
+ });
+
         console.log(title, postBody)
     }
     return (

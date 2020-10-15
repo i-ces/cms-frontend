@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from "axios"
 
 function Register() {
     const [name, setName] = useState("");
@@ -7,6 +8,15 @@ function Register() {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(name, email, password);
+
+        const data={name,email,password}
+        axios.post(`http://localhost:4000/users/signup`,data).then((res)=>{
+        console.log(res.data,"NEW USER CREATED")
+        })
+        .catch((error)=>{
+        console.log(error);
+        });
+
         setName("");
         setEmail("");
         setPassword("");
