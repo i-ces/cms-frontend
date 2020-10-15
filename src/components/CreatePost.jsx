@@ -3,22 +3,30 @@ import axios from "axios"
 
 function CreatePost() {
     const [title, setTitle] = useState("");
-    const [postBody, setPostBody] = useState("");
+    const [body, setPostBody] = useState("");
     const handleSubmit = e => {
         e.preventDefault();
+            const data ={title,body}
 
-        const data ={title,postBody}
- axios.post(`http://localhost:4000/content`,data).then((res)=>{
- if(res.errorMessage){
- console.log(res.errorMessage);
- }
- console.log(res.content,"Content Created")
- })
- .catch((error)=>{
- console.log(error);
- });
+            const config={
+                headers:{
+                    Authorization:'Bearer '+localStorage.getItem('token')
+                }
+            }
+    
+     axios.post(`http://localhost:4000/content`,data,config).then((res)=>{
+     if(res.data.errorMessage){
+     return console.log(res.data.errorMessage);
+     }
+     console.log(res.data,"Content Created")
+     })
+     .catch((error)=>{
+     console.log(error);
+     });
+    
+            console.log(title, body)
 
-        console.log(title, postBody)
+        
     }
     return (
         <div className="post-manage-form">
@@ -39,7 +47,7 @@ function CreatePost() {
                         className="form-control"
                         id="exampleFormControlTextarea1"
                         rows="10"
-                        value={postBody}
+                        value={body}
                         onChange={e => setPostBody(e.target.value)}
                     ></textarea>
                 </div>

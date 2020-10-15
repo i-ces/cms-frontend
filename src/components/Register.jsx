@@ -12,6 +12,8 @@ function Register() {
         const data={name,email,password}
         axios.post(`http://localhost:4000/users/signup`,data).then((res)=>{
         console.log(res.data,"NEW USER CREATED")
+        localStorage.setItem('token',res.data.token)
+        localStorage.setItem('_id',res.data.publicProfile._id)
         })
         .catch((error)=>{
         console.log(error);

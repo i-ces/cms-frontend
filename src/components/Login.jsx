@@ -11,7 +11,9 @@ function Login() {
    if(res.data.errorMessage){
     return  console.log(res.data.errorMessage)
    }  
-console.log(res.publicProfile,"LOGIN SUCESSFULL")
+console.log(res.data.publicProfile,"LOGIN SUCESSFULL")
+localStorage.setItem('token',res.data.token)
+localStorage.setItem('_id',res.data.publicProfile._id)
  })
  .catch((error)=>{
  console.log(error);
