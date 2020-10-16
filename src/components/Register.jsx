@@ -1,23 +1,25 @@
 import React, { useState } from 'react'
 import axios from "axios"
 
-function Register() {
+function Register(props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [accCreated, setAccCreated] = useState(false);
     const handleSubmit = e => {
         e.preventDefault();
         console.log(name, email, password);
 
-        const data={name,email,password}
-        axios.post(`http://localhost:4000/users/signup`,data).then((res)=>{
-        console.log(res.data,"NEW USER CREATED")
-        localStorage.setItem('token',res.data.token)
-        localStorage.setItem('_id',res.data.publicProfile._id)
+        const data = { name, email, password }
+        axios.post(`http://localhost:4000/users/signup`, data).then((res) => {
+            console.log(res.data, "NEW USER CREATED")
+            setAccCreated(true);
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('_id', res.data.publicProfile._id)
         })
-        .catch((error)=>{
-        console.log(error);
-        });
+            .catch((error) => {
+                console.log(error);
+            });
 
         setName("");
         setEmail("");
@@ -27,6 +29,9 @@ function Register() {
         <div className="loginForm">
             <form className="registerForm" onSubmit={handleSubmit}>
                 <div className="form-group">
+                    <div>
+                        {accCreated && <small>Account created successfully! Login to create post.</small>}
+                    </div>
                     <label htmlFor="exampleInputEmail1">Name</label>
                     <input
                         type="text"

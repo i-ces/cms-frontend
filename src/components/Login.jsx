@@ -1,27 +1,30 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import axios from "axios"
 
-function Login() {
+function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const handleSubmit = e => {
         e.preventDefault();
-        const data ={email,password}
- axios.post(`http://localhost:4000/users/login`,data).then((res)=>{
-   if(res.data.errorMessage){
-    return  console.log(res.data.errorMessage)
-   }  
-console.log(res.data.publicProfile,"LOGIN SUCESSFULL")
-localStorage.setItem('token',res.data.token)
-localStorage.setItem('_id',res.data.publicProfile._id)
- })
- .catch((error)=>{
- console.log(error);
- });
+        const data = { email, password }
+        axios.post(`http://localhost:4000/users/login`, data).then((res) => {
+            if (res.data.errorMessage) {
+                return console.log(res.data.errorMessage)
+            }
+            props.history.push('/create');
+            console.log(res.data.publicProfile, "LOGIN SUCESSFULL")
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('_id', res.data.publicProfile._id)
+        })
+            .catch((error) => {
+                console.log(error);
+            });
         console.log(email, password);
 
         setEmail("");
         setPassword("");
+
     }
     return (
         <div className="loginForm">
