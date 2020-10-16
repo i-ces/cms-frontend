@@ -16,7 +16,7 @@ function Home() {
                     </div>
                 </div>
             </div>
-            <div className="jumbotron jumbotron-fluid cta-box">
+            <div className="cta-box">
                 <div className="container">
                     <h2 className="cta-header">Register/Login To Start Posting</h2>
                     <p className="lead my-3" >Do you want to start posting and creating content? Sign up or login now to get started.</p>
