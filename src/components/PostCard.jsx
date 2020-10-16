@@ -12,18 +12,21 @@ function PostCard() {
         }
         axios.get('http://localhost:4000/content/user/:id',config).then((res)=>{
             fetch(`http://localhost:4000/content/user/${res.config.params._id}`)
-            .then(response => response.json())
-            .then( data =>setPosts(data))
-        }).catch((error)=>{
+            .then(res=>res.json())
+            .then(data=>setPosts(data))
+            }).catch((error)=>{
             console.log(error)
         }) 
     }, [])
- if (!posts) return <div>No Posts found!</div>
-    return (
+
+return (
         posts.map(post => {
+            if(post.errorMessage){
+                return <div>{post.errorMessage}</div>
+            }
             return (
                 <div className="post-box" >
-                    <div className="card postcard-box" key={post.id}>
+                    <div className="card postcard-box" key={post._id}>
                         <div className="card-body">
                             <h5 className="card-title">{post.title}</h5>
                             <p className="card-text">{post.body}</p>

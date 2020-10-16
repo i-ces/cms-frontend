@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Navbar from './layout/Navbar'
 import './App.css';
 import Login from './components/Login';
@@ -11,8 +11,9 @@ import CreatePost from './components/CreatePost';
 import UserProfile from './components/UserProfile';
 import Blog from './components/Blog';
 
-function App() {
-  return (
+class App extends Component{
+  render(){ 
+    return (
     <Router>
       <div className="App">
         <Navbar />
@@ -27,6 +28,8 @@ function App() {
       </div>
     </Router>
   );
+}
+ 
 }
 
 export default App;
