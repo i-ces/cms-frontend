@@ -13,7 +13,7 @@ function PostCard() {
         console.log(config.params._id)
         axios.get(`http://localhost:4000/content/user/${config.params._id}`).then((res) => {
         console.log(res.data)
-        setPosts([res.data])
+        setPosts(res.data)
             // fetch(`http://localhost:4000/content/user/${res.config.params._id}`)
             //     .then(response => response.json())
             //     .then(data => setPosts([data]))
