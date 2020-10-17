@@ -7,14 +7,6 @@ function PostCard() {
     const [user, setUser] = useState(null)
 
 
-    const handleDelete = (e) => {
-        console.log(`Delete ${e}`)
-    }
-    const handleEdit = (e) => {
-        console.log(`Edit ${e}`)
-    }
-
-
     useEffect(() => {
         const config = {
             params: {
@@ -33,6 +25,28 @@ function PostCard() {
             console.log(error)
         })
     }, [])
+
+    const config={
+        headers:{
+            Authorization:'Bearer '+localStorage.getItem('token')
+        }
+    }
+
+    const handleDelete = (e) => {
+        axios.delete(`http://localhost:4000/content/${e}`,config).then((res)=>{
+            console.log(res.data)
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+    const handleEdit = (e) => {
+        axios.patch(`http://localhost:4000/content/${e}`,config).then((res)=>{
+            console.log(res.data)
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
     // if (!posts) return <div>No Posts found!</div>
     return (
         posts.length > 0 ? (posts.map(post => {
