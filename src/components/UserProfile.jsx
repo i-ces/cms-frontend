@@ -1,13 +1,36 @@
 import React from 'react'
 import PostCard from './PostCard'
+import axios from "axios"
 
-function UserProfile() {
+
+
+class UserProfile extends React.Component{
+     state={
+        userName:'',
+        email:''
+    };
+
+    componentDidMount(){
+        const config={
+            params:{ 
+                _id:localStorage.getItem('_id')
+            }
+        }
+        axios.get(`http://localhost:4000/users/${config.params._id}`).then((res)=>{
+           //console.log(res.data.name)
+           this.setState({userName:res.data.name,email:res.data.email})
+        }).catch((e)=>{
+            console.log(e)
+        })
+    }
+    
+render(){
     return (
         <div>
             <div className="jumbotron container my-3">
-                <h2 className="display-3">User Name</h2>
+                <h2 className="display-3">{this.state.userName}</h2>
                 <hr className="my-4" />
-                <p><strong>Email:</strong> demo@emailprovider.com</p>
+                <p><strong>Email:</strong>{this.state.email}</p>
                 <button className="btn btn-primary">Edit</button>
             </div>
             <div className="container">
@@ -17,5 +40,9 @@ function UserProfile() {
         </div>
     )
 }
+    
+}
+
+
 
 export default UserProfile
