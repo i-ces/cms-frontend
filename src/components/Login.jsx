@@ -5,12 +5,13 @@ import axios from "axios"
 function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage,setErrormessage]=useState("")
     const handleSubmit = e => {
         e.preventDefault();
         const data = { email, password }
         axios.post(`http://localhost:4000/users/login`, data).then((res) => {
             if (res.data.errorMessage) {
-                return console.log(res.data.errorMessage)
+                return setErrormessage(res.data.errorMessage)
             }
             props.history.push('/create');
             console.log(res.data.publicProfile, "LOGIN SUCESSFULL")
@@ -30,6 +31,9 @@ function Login(props) {
         <div className="loginForm">
             <form className="signinForm" onSubmit={handleSubmit}>
                 <div className="form-group">
+                <div>
+                        {<small>{errorMessage}</small>}
+                    </div>
                     <label htmlFor="exampleInputEmail1">Email address</label>
                     <input
                         type="email"

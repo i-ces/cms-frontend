@@ -10,27 +10,19 @@ function PostCard() {
                 _id: localStorage.getItem('_id')
             }
         }
-        axios.get('http://localhost:4000/content/user/:id', config).then((res) => {
-            fetch(`http://localhost:4000/content/user/${res.config.params._id}`)
-<<<<<<< HEAD
-            .then(res=>res.json())
-            .then(data=>setPosts(data))
-            }).catch((error)=>{
-=======
-                .then(response => response.json())
-                .then(data => setPosts(data))
+        console.log(config.params._id)
+        axios.get(`http://localhost:4000/content/user/${config.params._id}`).then((res) => {
+        console.log(res.data)
+        setPosts([res.data])
+            // fetch(`http://localhost:4000/content/user/${res.config.params._id}`)
+            //     .then(response => response.json())
+            //     .then(data => setPosts([data]))
         }).catch((error) => {
->>>>>>> 732383794d03d1fa5197040e23395359deeb124c
             console.log(error)
         })
     }, [])
-<<<<<<< HEAD
-
-return (
-=======
-    if (!posts) return <div>No Posts found!</div>
+    // if (!posts) return <div>No Posts found!</div>
     return (
->>>>>>> 732383794d03d1fa5197040e23395359deeb124c
         posts.map(post => {
             if(post.errorMessage){
                 return <div>{post.errorMessage}</div>
@@ -51,3 +43,4 @@ return (
 }
 
 export default PostCard
+
