@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from "axios"
 
 function PostCard() {
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState(null);
     useEffect(() => {
         const config = {
             params: {
@@ -12,32 +12,21 @@ function PostCard() {
         }
         axios.get('http://localhost:4000/content/user/:id', config).then((res) => {
             fetch(`http://localhost:4000/content/user/${res.config.params._id}`)
-<<<<<<< HEAD
-            .then(res=>res.json())
-            .then(data=>setPosts(data))
-            }).catch((error)=>{
-=======
                 .then(response => response.json())
                 .then(data => setPosts([data]))
         }).catch((error) => {
->>>>>>> 732383794d03d1fa5197040e23395359deeb124c
             console.log(error)
         })
     }, [])
-<<<<<<< HEAD
-
-return (
-=======
     if (!posts) return <div>No Posts found!</div>
     return (
->>>>>>> 732383794d03d1fa5197040e23395359deeb124c
         posts.map(post => {
-            if(post.errorMessage){
+            if (post.errorMessage) {
                 return <div>{post.errorMessage}</div>
             }
             return (
-                <div className="post-box" >
-                    <div className="card postcard-box" key={post._id}>
+                <div className="post-box" key={post._id}>
+                    <div className="card postcard-box">
                         <div className="card-body">
                             <h5 className="card-title">{post.title}</h5>
                             <p className="card-text">{post.body}</p>
