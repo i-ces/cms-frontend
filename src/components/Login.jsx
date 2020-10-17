@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { setUserSession } from '../utils/Common';
 import axios from "axios"
 
 function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errorMessage,setErrormessage]=useState("")
+    const [errorMessage, setErrormessage] = useState("")
     const handleSubmit = e => {
         e.preventDefault();
         const data = { email, password }
@@ -15,8 +15,10 @@ function Login(props) {
             }
             props.history.push('/create');
             console.log(res.data.publicProfile, "LOGIN SUCESSFULL")
+            // setUserSession(res.data.token, res.data.publicProfile);
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('_id', res.data.publicProfile._id)
+
         })
             .catch((error) => {
                 console.log(error);
@@ -31,7 +33,7 @@ function Login(props) {
         <div className="loginForm">
             <form className="signinForm" onSubmit={handleSubmit}>
                 <div className="form-group">
-                <div>
+                    <div>
                         {<small>{errorMessage}</small>}
                     </div>
                     <label htmlFor="exampleInputEmail1">Email address</label>

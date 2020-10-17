@@ -5,6 +5,16 @@ import axios from "axios"
 function PostCard() {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState(null)
+
+
+    const handleDelete = (e) => {
+        console.log(`Delete ${e}`)
+    }
+    const handleEdit = (e) => {
+        console.log(`Edit ${e}`)
+    }
+
+
     useEffect(() => {
         const config = {
             params: {
@@ -25,16 +35,9 @@ function PostCard() {
     }, [])
     // if (!posts) return <div>No Posts found!</div>
     return (
-        posts.map(post => {
+        posts.length > 0 ? (posts.map(post => {
             if (post.errorMessage) {
                 return <div>{post.errorMessage}</div>
-            }
-            let updateDivs;
-            if (user === post.author) {
-                updateDivs = <div>
-                    <button className="btn btn-primary mx-3">Delete</button>
-                    <button className="btn btn-danger mx-3">Edit</button>
-                </div>
             }
             return (
                 <div className="post-box" key={post._id}>
@@ -42,12 +45,21 @@ function PostCard() {
                         <div className="card-body">
                             <h5 className="card-title">{post.title}</h5>
                             <p className="card-text">{post.body}</p>
-                            {updateDivs}
+                            {
+                                (user === post.author) && (
+                                    <>
+                                        <button className="btn btn-primary mx-3" onClick={() => handleDelete(post._id)}>Delete</button>
+                                        <button className="btn btn-danger mx-3" onClick={() => handleEdit(post._id)}>Edit</button>
+                                    </>
+                                )
+                            }
                         </div>
                     </div>
                 </div >
             )
-        })
+        }))
+            :
+            (<h2>No Posts Found.</h2>)
     )
 }
 

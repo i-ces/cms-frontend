@@ -11,9 +11,8 @@ import CreatePost from './components/CreatePost';
 import UserProfile from './components/UserProfile';
 import Blog from './components/Blog';
 
-class App extends Component{
-  render(){ 
-    return (
+function App() {
+  return (
     <Router>
       <div className="App">
         <Navbar />
@@ -28,8 +27,6 @@ class App extends Component{
       </div>
     </Router>
   );
-}
- 
 }
 
 export default App;
