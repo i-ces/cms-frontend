@@ -30,7 +30,7 @@ class UserProfile extends React.Component {
     }
 
     handleDelete = e => {
-        console.log(`Delete ${this.state.user}`)
+        window.confirm("Are you sure you wish to delete this item?") && console.log(`Delete ${this.state.user}`)
     }
     handleEdit = e => {
         console.log(`Edit ${this.state.user}`)

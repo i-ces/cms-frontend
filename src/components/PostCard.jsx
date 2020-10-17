@@ -8,7 +8,7 @@ function PostCard() {
 
 
     const handleDelete = (e) => {
-        console.log(`Delete ${e}`)
+        window.confirm("Are you sure you wish to delete this item?") && console.log(`Delete ${e}`)
     }
     const handleEdit = (e) => {
         console.log(`Edit ${e}`)
