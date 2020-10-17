@@ -6,16 +6,20 @@ function Register(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [accCreated, setAccCreated] = useState(false);
+    const [errorMessage,setErrormessage]=useState("")
     const handleSubmit = e => {
         e.preventDefault();
         console.log(name, email, password);
 
         const data = { name, email, password }
         axios.post(`http://localhost:4000/users/signup`, data).then((res) => {
-            console.log(res.data, "NEW USER CREATED")
-            setAccCreated(true);
-            localStorage.setItem('token', res.data.token)
-            localStorage.setItem('_id', res.data.publicProfile._id)
+            if(res.data.errorMessage){
+               return setErrormessage(res.data.errorMessage)
+            }
+                console.log(res.data, "NEW USER CREATED")
+                setAccCreated(true);
+                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('_id', res.data.publicProfile._id)
         })
             .catch((error) => {
                 console.log(error);
@@ -29,8 +33,11 @@ function Register(props) {
         <div className="loginForm">
             <form className="registerForm" onSubmit={handleSubmit}>
                 <div className="form-group">
+                <div>
+                        {<small>{errorMessage}</small>}
+                    </div>
                     <div>
-                        {accCreated && <small>Account created successfully! Login to create post.</small>}
+                        {accCreated && <small>Account created successfully!Start creating post.</small>}
                     </div>
                     <label htmlFor="exampleInputEmail1">Name</label>
                     <input
