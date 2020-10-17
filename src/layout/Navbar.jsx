@@ -26,9 +26,20 @@ class Navbar extends Component {
         })
     }
 
-    handleDelete = (e) => {
-        console.log(`Logout ${e}`)
-    }
+    // handleDelete = () => {
+    //     const config = {
+    //         headers: {
+    //             Authorization: 'Bearer ' + localStorage.getItem('token')
+    //         }
+    //     }
+    //     console.log(config.headers.Authorization)
+    //     axios.post('http://localhost:4000/users/logout',config).then((res)=>{
+            
+    //         console.log(res,'logged out')
+    //     }).catch((error)=>{
+    //         console.log(error)
+    //     })
+    // }
     render() {
         let navLinks;
         if (this.state.user) {
@@ -40,7 +51,7 @@ class Navbar extends Component {
                     <li className="nav-item">
                         <Link className="nav-link" to="/profile">Profile <span className="sr-only">(current)</span></Link>
                     </li>
-                    <button className="btn btn-danger" onClick={() => this.handleDelete(this.state.user)}>Logout</button>
+                    <button className="btn btn-danger" onClick={() => localStorage.clear()}>Logout</button>
                 </>
             )
         }
