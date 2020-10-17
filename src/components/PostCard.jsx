@@ -25,7 +25,7 @@ function PostCard() {
     }, [])
     // if (!posts) return <div>No Posts found!</div>
     return (
-        posts.map(post => {
+        posts.length > 0 ? (posts.map(post => {
             if (post.errorMessage) {
                 return <div>{post.errorMessage}</div>
             }
@@ -47,7 +47,9 @@ function PostCard() {
                     </div>
                 </div >
             )
-        })
+        }))
+            :
+            (<h2>No Posts Found.</h2>)
     )
 }
 
