@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-function Navbar() {
+
+function Navbar(props) {
+
     return (
         <div>
             <section id="nav-bar">
@@ -30,6 +32,7 @@ function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/login">Login <span className="sr-only">(current)</span></Link>
                             </li>
+                            <button className="btn btn-danger">Logout</button>
                         </ul>
                     </div>
                 </nav>
