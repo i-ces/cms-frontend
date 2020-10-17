@@ -10,23 +10,27 @@ import Post from './components/Post';
 import CreatePost from './components/CreatePost';
 import UserProfile from './components/UserProfile';
 import Blog from './components/Blog';
+import axios from 'axios'
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/create" component={CreatePost} />
-          <Route path="/profile" component={UserProfile} />
-          <Route path="/blog" component={Blog} />
-        </Switch>
-      </div>
-    </Router>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/create" component={CreatePost} />
+            <Route path="/profile" component={UserProfile} />
+            <Route path="/blog" component={Blog} />
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
+
 
 export default App;

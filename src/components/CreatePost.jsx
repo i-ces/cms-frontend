@@ -1,32 +1,33 @@
 import React, { useState } from 'react'
 import axios from "axios"
 
-function CreatePost() {
+function CreatePost(props) {
     const [title, setTitle] = useState("");
     const [body, setPostBody] = useState("");
     const handleSubmit = e => {
         e.preventDefault();
-            const data ={title,body}
+        const data = { title, body }
 
-            const config={
-                headers:{
-                    Authorization:'Bearer '+localStorage.getItem('token')
-                }
+        const config = {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
             }
-    
-     axios.post(`http://localhost:4000/content`,data,config).then((res)=>{
-     if(res.data.errorMessage){
-     return console.log(res.data.errorMessage);
-     }
-     console.log(res.data,"Content Created")
-     })
-     .catch((error)=>{
-     console.log(error);
-     });
-    
-            console.log(title, body)
+        }
 
-        
+        axios.post(`http://localhost:4000/content`, data, config).then((res) => {
+            if (res.data.errorMessage) {
+                return console.log(res.data.errorMessage);
+            }
+            console.log(res.data, "Content Created")
+        })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        console.log(title, body)
+        props.history.push('/blog');
+
+
     }
     return (
         <div className="post-manage-form">
