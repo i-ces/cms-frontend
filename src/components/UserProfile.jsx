@@ -29,12 +29,19 @@ class UserProfile extends React.Component {
         })
     }
 
+    handleDelete = e => {
+        console.log(`Delete ${this.state.user}`)
+    }
+    handleEdit = e => {
+        console.log(`Edit ${this.state.user}`)
+    }
+
     render() {
         let buttons;
-        if (this.user) {
+        if (this.state.user) {
             buttons = <>
-                <button className="btn btn-primary mx-3">Edit</button>
-                <button className="btn btn-danger mx-3">Delete Profile</button>
+                <button className="btn btn-primary mx-3" onClick={() => this.handleEdit(this.state.user)}>Edit</button>
+                <button className="btn btn-danger mx-3" onClick={() => this.handleDelete(this.state.user)}>Delete Profile</button>
             </>
         }
         return (
