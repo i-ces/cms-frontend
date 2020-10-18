@@ -242,31 +242,46 @@ class UserProfile extends React.Component {
         })
     }
     //Send post request from these functions
-    updateName = ()=> {
-                    axios.patch('http://localhost:4000/users/self').then((res)=>{
-                        console.log(res)
-                        this.setState({ userName: res.data.name, email: res.data.email })
+    // updateName = ()=> {
+    //                 axios.patch('http://localhost:4000/users/self').then((res)=>{
+    //                     console.log(res.data.name)
+    //                     this.setState({ userName: res.data.name })
             
-                    }).catch((error)=>{
-                        console.log(error)
-                    })
+    //                 }).catch((error)=>{
+    //                     console.log(error)
+    //                 })
 
-                    const config = {
-                        params: {
-                            _id: localStorage.getItem('_id')
-                        }
-                    }
+    //                 // const config = {
+    //                 //     params: {
+    //                 //         _id: localStorage.getItem('_id')
+    //                 //     }
+    //                 // }
             
-                    this.setState({
-                        user: config.params._id
-                    })
-                    axios.get(`http://localhost:4000/users/${config.params._id}`).then((res) => {
-                        //console.log(res.data.name)
-                        this.setState({ userName: res.data.name, email: res.data.email })
-                    }).catch((e) => {
-                        console.log(e)
-                    })
-    }
+    //                 // this.setState({
+    //                 //     user: config.params._id
+    //                 // })
+    //                 // axios.get(`http://localhost:4000/users/${config.params._id}`).then((res) => {
+    //                 //     //console.log(res.data.name)
+    //                 //     this.setState({ userName: res.data.name, email: res.data.email })
+    //                 // }).catch((e) => {
+    //                 //     console.log(e)
+    //                 // })
+    // 
+
+    updateProfile= ()=> {
+        const data={name:this.state.userName,
+        email:this.state.email
+        }
+        
+                            axios.patch('http://localhost:4000/users/self',data).then((res)=>{
+                                console.log(res)
+
+                                this.setState({ userName: res.data.name, email: res.data.email })
+                    
+                            }).catch((error)=>{
+                                console.log(error)
+                            })
+            }
 
     updateEmail = e => {
         console.log(e)
@@ -276,7 +291,7 @@ class UserProfile extends React.Component {
         let buttons;
         if (this.state.user) {
             buttons = <>
-                <button className="btn btn-primary mx-3" >Edit</button>
+                <button className="btn btn-primary mx-3"  onClick={()=>this.updateProfile()}>Edit</button>
 
                 <button className="btn btn-danger mx-3" onClick={() => this.handleDelete()}>Delete Profile</button>
             </>
