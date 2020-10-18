@@ -5,7 +5,6 @@ import axios from "axios"
 function PostCard() {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState(null);
-    const [updatePost, setUpdatePost] = useState(null);
     const [updatedTitle, setUpdatedTitle] = useState('');
     const [updatedBody, setUpdatedBody] = useState('');
 
@@ -60,12 +59,12 @@ function PostCard() {
     }
 
     const updatePosts = () => {
-        console.log(updatedTitle, updatedBody, updatePost)
+        console.log(updatedTitle, updatedBody)
     }
 
     // if (!posts) return <div>No Posts found!</div>
     return (
-        posts.length > 0 ? (posts.map(post => {
+        posts.length > 0 ? (posts.map((post, index) => {
             if (post.errorMessage) {
                 return <div>{post.errorMessage}</div>
             }
@@ -79,8 +78,11 @@ function PostCard() {
                                 (user === post.author) && (
                                     <>
                                         <button className="btn btn-primary mx-3" onClick={() => handleDelete(post._id)}>Delete</button>
-                                        <button className="btn btn-danger mx-3" data-toggle="modal" data-target="#exampleModal3" onClick={e => setUpdatePost(e._id)}>Edit</button>
-                                        <div className="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+                                        <button className="btn btn-danger mx-3" data-toggle="modal" data-target="#exampleModal3">Edit</button>
+                                        {/* Modal For Post Edit*/}
+                                        <div className="modal fade" id="exampleModal3" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div className="modal-dialog">
                                                 <div className="modal-content">
                                                     <div className="modal-header">
@@ -90,8 +92,8 @@ function PostCard() {
                                                         </button>
                                                     </div>
                                                     <div className="modal-body">
-                                                        <input className="form-control my-3" type="text" onChange={(e) => setUpdatedTitle(e.target.value)} defaultValue={post.title} />
-                                                        <input className="form-control" type="text" onChange={(e) => setUpdatedBody(e.target.value)} defaultValue={post.body} />
+                                                        <input className="form-control my-3" type="text" onChange={(e) => setUpdatedTitle(e.target.value)} defaultValue={""} />
+                                                        <input className="form-control" type="text" onChange={(e) => setUpdatedBody(e.target.value)} defaultValue={""} />
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
