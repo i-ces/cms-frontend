@@ -15,7 +15,7 @@ You will also see any lint errors in the console.
 
 ### For full Functioning CMS
 
-Clone the backend of this repo. Then run 
+Clone the [backend](https://github.com/DhurbaBrl/CMS-backend) of this repo. Then run 
 
 ### `npm install`
 
