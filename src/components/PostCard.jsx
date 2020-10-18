@@ -7,6 +7,14 @@ function PostCard() {
     const [user, setUser] = useState(null)
 
 
+    // const handleDelete = (e) => {
+    //     window.confirm("Are you sure you wish to delete this item?") && console.log(`Delete ${e}`)
+    // }
+    // const handleEdit = (e) => {
+    //     console.log(`Edit ${e}`)
+    // }
+
+
     useEffect(() => {
         const config = {
             params: {
@@ -33,6 +41,7 @@ function PostCard() {
     }
 
     const handleDelete = (e) => {
+        window.confirm("Are you sure you wish to delete this item?") &&
         axios.delete(`http://localhost:4000/content/${e}`,config).then((res)=>{
             console.log(res.data)
         }).catch((error)=>{

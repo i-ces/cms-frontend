@@ -34,7 +34,7 @@ class Navbar extends Component {
     //     }
     //     console.log(config.headers.Authorization)
     //     axios.post('http://localhost:4000/users/logout',config).then((res)=>{
-            
+    //         localStorage.clear()
     //         console.log(res,'logged out')
     //     }).catch((error)=>{
     //         console.log(error)
