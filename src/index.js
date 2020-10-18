@@ -5,6 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
+import axios from "axios"
+
+axios.defaults.headers.common['Authorization']='Bearer '+localStorage.getItem('token')
 
 ReactDOM.render(
   <React.StrictMode>
