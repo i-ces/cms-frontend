@@ -4,7 +4,10 @@ import axios from "axios"
 
 function PostCard() {
     const [posts, setPosts] = useState([]);
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(null);
+    const [updatePost, setUpdatePost] = useState(null);
+    const [updatedTitle, setUpdatedTitle] = useState('');
+    const [updatedBody, setUpdatedBody] = useState('');
 
 
     // const handleDelete = (e) => {
@@ -34,26 +37,30 @@ function PostCard() {
         })
     }, [])
 
-    const config={
-        headers:{
-            Authorization:'Bearer '+localStorage.getItem('token')
+    const config = {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
         }
     }
 
     const handleDelete = (e) => {
         window.confirm("Are you sure you wish to delete this item?") &&
-        axios.delete(`http://localhost:4000/content/${e}`,config).then((res)=>{
+            axios.delete(`http://localhost:4000/content/${e}`, config).then((res) => {
+                console.log(res.data)
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
+    const handleEdit = (e) => {
+        axios.patch(`http://localhost:4000/content/${e}`, config).then((res) => {
             console.log(res.data)
-        }).catch((error)=>{
+        }).catch((error) => {
             console.log(error)
         })
     }
-    const handleEdit = (e) => {
-        axios.patch(`http://localhost:4000/content/${e}`,config).then((res)=>{
-            console.log(res.data)
-        }).catch((error)=>{
-            console.log(error)
-        })
+
+    const updatePosts = () => {
+        console.log(updatedTitle, updatedBody, updatePost)
     }
 
     // if (!posts) return <div>No Posts found!</div>
@@ -72,7 +79,27 @@ function PostCard() {
                                 (user === post.author) && (
                                     <>
                                         <button className="btn btn-primary mx-3" onClick={() => handleDelete(post._id)}>Delete</button>
-                                        <button className="btn btn-danger mx-3" onClick={() => handleEdit(post._id)}>Edit</button>
+                                        <button className="btn btn-danger mx-3" data-toggle="modal" data-target="#exampleModal3" onClick={e => setUpdatePost(e._id)}>Edit</button>
+                                        <div className="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div className="modal-dialog">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h5 className="modal-title" id="exampleModalLabel">Edit Post</h5>
+                                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <input className="form-control my-3" type="text" onChange={(e) => setUpdatedTitle(e.target.value)} defaultValue={post.title} />
+                                                        <input className="form-control" type="text" onChange={(e) => setUpdatedBody(e.target.value)} defaultValue={post.body} />
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" className="btn btn-primary" onClick={updatePosts}>Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </>
                                 )
                             }
