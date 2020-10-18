@@ -34,7 +34,7 @@ function PostCard() {
         }).catch((error) => {
             console.log(error)
         })
-    }, [])
+    }, [posts])
 
     const config = {
         headers: {
@@ -46,6 +46,7 @@ function PostCard() {
         window.confirm("Are you sure you wish to delete this item?") &&
             axios.delete(`http://localhost:4000/content/${e}`, config).then((res) => {
                 console.log(res.data)
+                
             }).catch((error) => {
                 console.log(error)
             })
@@ -58,8 +59,15 @@ function PostCard() {
         })
     }
 
-    const updatePosts = () => {
-        console.log(updatedTitle, updatedBody)
+    const updatePosts = (e) => {
+        const data={title:updatedTitle,body:updatedBody}
+        axios.patch(`http://localhost:4000/content/${e}`, data).then((res) => {
+            console.log(res.data)
+            setPosts(res.data)
+        }).catch((error) => {
+            console.log(error)
+        })
+        // console.log(updatedTitle, updatedBody)
     }
 
     // if (!posts) return <div>No Posts found!</div>
@@ -92,12 +100,12 @@ function PostCard() {
                                                         </button>
                                                     </div>
                                                     <div className="modal-body">
-                                                        <input className="form-control my-3" type="text" onChange={(e) => setUpdatedTitle(e.target.value)} defaultValue={""} />
-                                                        <input className="form-control" type="text" onChange={(e) => setUpdatedBody(e.target.value)} defaultValue={""} />
+                                                        <input className="form-control my-3" type="text" onChange={(e) => setUpdatedTitle(e.target.value)} defaultValue={post.title} />
+                                                        <input className="form-control" type="text" onChange={(e) => setUpdatedBody(e.target.value)} defaultValue={post.body} />
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="button" className="btn btn-primary" onClick={updatePosts}>Save changes</button>
+                                                        <button type="button" className="btn btn-primary" onClick={()=>updatePosts(post._id)}>Save changes</button>
                                                     </div>
                                                 </div>
                                             </div>

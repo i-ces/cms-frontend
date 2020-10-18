@@ -40,6 +40,11 @@ class Navbar extends Component {
     //         console.log(error)
     //     })
     // }
+    handleLogout=()=>{
+        localStorage.clear()
+        // this.setState({ state: this.state });
+        // this.forceUpdate()
+    }
     render() {
         let navLinks;
         if (this.state.user) {
@@ -51,7 +56,7 @@ class Navbar extends Component {
                     <li className="nav-item">
                         <Link className="nav-link" to="/profile">Profile <span className="sr-only">(current)</span></Link>
                     </li>
-                    <button className="btn btn-danger" onClick={() => localStorage.clear()}>Logout</button>
+                    <button className="btn btn-danger" onClick={() => this.handleLogout()}>Logout</button>
                 </>
             )
         }
